@@ -16,7 +16,11 @@ class Spree::SubscriptionsController < Spree::BaseController
     else
       begin
           @mc_member = gibbon.member_info(Spree::Config.get(:mailchimp_list_id), params[:email])
-        rescue Gibbon::APIError => e
+
+	rescue => ex
+
+	   Exceptional.handle ex
+
       end
 
       if @mc_member
