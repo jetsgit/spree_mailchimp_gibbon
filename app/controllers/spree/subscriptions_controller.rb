@@ -2,10 +2,6 @@ require 'exceptional'
 
 class Spree::SubscriptionsController < Spree::BaseController
 
-  def gibbon
-    @gibbon ||= Gibbon.new({ :api_key => Spree::Config.get(:mailchimp_api_key) })
-  end
-
   def create
     @errors = []
 
@@ -39,8 +35,15 @@ class Spree::SubscriptionsController < Spree::BaseController
       end
     end
 
-    respond_to do |wants|
-      wants.js
+    respond_to do |format|
+      format.js { render :layout => false }
     end
   end
+
+  private
+
+    def gibbon
+	@gibbon ||= Gibbon.new({ :api_key => Spree::Config.get(:mailchimp_api_key) })
+    end
+
 end
