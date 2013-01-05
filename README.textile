@@ -1,8 +1,8 @@
-h1. Spree + Mail Chimp
+h1. Mail Chimp integration with Gibbon gem for Spree
 
-MailChimp API integration for your Spree store, using the hominid gem.
+MailChimp API integration for a Spree store, using the gibbon gem.
 
-Adds a checkbox to the user signup form to allow customer to opt-in to your Mailchimp mailing list. Mailchimp API calls happen via the hominid gem.
+Adds a checkbox to the user signup form to allow customer to opt-in to your Mailchimp mailing list. Mailchimp API calls happen via the gibbon gem.
 
 Mailchimp subscription status is tracked with a boolean flag on the users table, we also fetch and store the unique MC record id when the subscription is created. This allows us to modify existing email addresses with minimal fuss.
 
@@ -18,14 +18,14 @@ h3. Installation
 
 Add to project's Gemfile:
 <pre><code>
-gem 'spree_mail_chimp'
+gem 'spree_mailchimp_gibbon', :git => git://github.com/bluehandtalking/spree_mailchimp_gibbon.git 
 </code> </pre>
 
 Run from project's root:
 <pre><code>
 bundle install
 
-rails g spree_mail_chimp:install
+rails g spree_mailchimp_gibbon:install
 </code> </pre>
 
 h3. Configuration
@@ -36,36 +36,20 @@ Note, using Mail Chimp "Merge Vars", you can have any callable methods on User s
 to the MC list, mapped to indentically named (but uppercased) fields in the MC list admin console.
 Unfortunately these are only sent at the time the subscription is created, so there isn't much available.
 
-h3. Changes
-
-Version 3.0.0 - released 19 Apr 2012 - Spree 1.0 compat
-Version 2.0.0 - released 6 Dec 2010 - Spree 0.30-stable
-Version 1.0.1 - released 21 Nov 2010 - Spree 0.11-stable
 
 h3. Requirements
 
 Spree >= 1.0
-hominid >= 2.2.0 http://rubygems.org/gems/hominid
+
+gem 'gibbon',  '~> 0.4.2' 
+gem 'exceptional'  #  For Testing
 
 Also uses the jQuery SimpleModal plugin, included.
 
 h3. Credits
 
-Authored by Sam Beam @sbeam
-Migrated to Spree 0.30 by Bastian Schnurle @bzt
-Migrated to Spree 1.0 (and extensively refactored) by James Kong @jkongie
+Authored by Jerrold Thompson @bluehandtalking
 
-Inspired originally by https://github.com/softa/mailee_spree
+Based heavily on spree_mail_chimp by Sam Beam @sbeam
 
 includes SimpleModal http://www.ericmmartin.com/projects/simplemodal/
-
-h3. TODO
-
-* make subscribe_to_newsletter_field work
-* Send user address info to MC via merge vars, when address is given
-* Export new orders to Mailchimp for full CRM gnarliness
-* Utility to export existing users to Mailchimp
-* Add admin controller to view lists and subscriptions
-* Allow for multiple lists
-* Tests :/
-
