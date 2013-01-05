@@ -21,5 +21,4 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'spree_core', '~> 1.1.3'
   s.add_dependency 'gibbon',    '~> 0.4.2'
-  s.add_dependency 
 end
