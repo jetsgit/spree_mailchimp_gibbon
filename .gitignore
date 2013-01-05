@@ -1,0 +1,11 @@
+\#*
+**/*.db
+*~
+.#*
+.DS_Store
+.dotest
+.idea
+.loadpath
+.project
+coverage/*
+*.swp
