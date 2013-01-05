@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_mailchimp_gibbon'
-  s.version     = '0.0.5'
+  s.version     = '0.0.6'
   s.summary     = 'Mail Chimp subscriptions for Spree using gibbon Mailchimp API wrapper'
   s.required_ruby_version = '>= 1.8.7'
 
@@ -21,4 +21,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'spree_core', '~> 1.1.3'
   s.add_dependency 'gibbon',    '~> 0.4.2'
+  s.add_dependency 
 end
