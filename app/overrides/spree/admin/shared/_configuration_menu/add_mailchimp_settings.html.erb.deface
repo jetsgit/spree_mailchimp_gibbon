@@ -2,4 +2,3 @@
 igurations_sidebar_menu[data-hook]" -->
 
 <%= configurations_sidebar_menu_item t('spree_mailchimp_gibbon.mailchimp_gibbon_settings'), edit_admin_mailchimp_gibbon_settings_path %>
-

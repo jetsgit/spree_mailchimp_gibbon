@@ -12,5 +12,3 @@ class Spree::Admin::MailchimpGibbonSettingsController < Spree::Admin::BaseContro
     end
   end
 end
-
-
