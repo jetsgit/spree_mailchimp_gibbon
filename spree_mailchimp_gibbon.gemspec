@@ -20,5 +20,6 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
 
   s.add_dependency 'spree_core', '~> 1.3.x'
-  s.add_dependency 'gibbon',    '~> 0.4.2'
+  s.add_dependency 'gibbon', '~> 0.4.x'
+  s.add_dependency 'exceptional', '~> 2.0.x'
 end
