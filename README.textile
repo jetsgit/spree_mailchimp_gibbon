@@ -23,14 +23,13 @@ gem 'spree_mailchimp_gibbon', :git => git://github.com/bluehandtalking/spree_mai
 
 Run from project's root:
 <pre>
-  <code>
-    $ bundle install
-    $ rails g spree_mailchimp_gibbon:install
-  </code> 
-  Add the following line in the bottom of your javascripts/admin/all.js file:
-  <code> 
-    //= require jquery.validate/jquery.validate.min
-  </code> 
+  $ bundle install
+  $ rails g spree_mailchimp_gibbon:install
+</pre>
+
+Add the following line in the bottom of your javascripts/admin/all.js file: 
+<pre>
+  //= require jquery.validate/jquery.validate.min 
 </pre>
 
 h3. Configuration
