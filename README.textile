@@ -27,7 +27,13 @@ Run from project's root:
   $ rails g spree_mailchimp_gibbon:install
 </pre>
 
-Add the following line in the bottom of your javascripts/admin/all.js file: 
+Add this in your app's config/environments/production.rb file:
+
+<code>
+  config.assets.precompile += %w( admin/jquery.validate/jquery.validate.min.js )
+</code>
+
+Or add the following line at the bottom of your javascripts/admin/all.js file: 
 <pre>
   //= require jquery.validate/jquery.validate.min 
 </pre>
