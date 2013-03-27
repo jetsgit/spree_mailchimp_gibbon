@@ -13,7 +13,7 @@ Spree::User.class_eval do
   def mailchimp_add_to_mailing_list
     if self.is_mail_list_subscriber?
       begin
-        gibbon.list_subscribe(mailchimp_list_id, self.email, mailchimp_merge_vars, 'html', *mailchimp_subscription_opts)
+        gibbon.list_subscribe({:id => mailchimp_list_id, :email_address => self.email, :merge_vars => mailchimp_merge_vars})
         logger.debug "Fetching new mailchimp subscriber info"
 
         assign_mailchimp_subscriber_id if self.mailchimp_subscriber_id.blank?
@@ -34,7 +34,7 @@ Spree::User.class_eval do
         gibbon.list_unsubscribe(mailchimp_list_id, self.email, false, false, true)
         logger.debug "Removing mailchimp subscriber"
       rescue  => ex
-	Exceptional.handle ex 
+        Exceptional.handle ex 
         logger.warn "SpreeMailChimp: Failed to remove contact from Mailchimp: #{ex.message}"
       end
     end
@@ -58,7 +58,7 @@ Spree::User.class_eval do
   # Returns the Mailchimp ID
   def assign_mailchimp_subscriber_id
     begin
-      response = gibbon.list_member_info(mailchimp_list_id, [self.email]).with_indifferent_access
+      response = gibbon.list_member_info({:id => mailchimp_list_id, :email_address => [self.email]}).with_indifferent_access
 
       if response[:success] == 1
         member = response[:data][0]
@@ -114,7 +114,7 @@ Spree::User.class_eval do
   def mailchimp_merge_vars
     merge_vars = {}
     if mailchimp_merge_user_attribs = Spree::Config.get(:mailchimp_merge_vars)
-      mailchimp_merge_user_attribs.split(',').each do |method|
+      mailchimp_merge_user_attribs.split(',').reject(&:blank?).each do |method|
         merge_vars[method.upcase] = self.send(method.downcase) if @user.respond_to? method.downcase
       end
     end
