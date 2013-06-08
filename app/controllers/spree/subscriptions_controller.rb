@@ -43,7 +43,7 @@ class Spree::SubscriptionsController < Spree::BaseController
   private
 
     def gibbon
-	@gibbon ||= Gibbon.new(Spree::Config.get(:mailchimp_api_key))	
+	    @gibbon ||= Gibbon.new(Spree::Config.get(:mailchimp_api_key))	
     end
 
 end
