@@ -12,7 +12,7 @@ class Spree::SubscriptionsController < Spree::BaseController
         @mc_member = gibbon.member_info(Spree::Config.get(:mailchimp_list_id), params[:email])
 
       rescue Exception => ex
-        logger.warn "SpreeMailChimp: Failed to subscribe user: #{ex.message}"
+        logger.warn "SpreeMailChimp: Failed to subscribe user: #{ex.message}\n#{ex.backtrace.join("\n")}"
 
       end
 
@@ -23,7 +23,7 @@ class Spree::SubscriptionsController < Spree::BaseController
           gibbon.subscribe({:id => Spree::Config.get(:mailchimp_list_id),:email_address =>  params[:email] })
 
         rescue Exception => ex
-          logger.warn "SpreeMailChimp: Failed to subscribe user: #{ex.message}"
+          logger.warn "SpreeMailChimp: Failed to subscribe user: #{ex.message}\n#{ex.backtrace.join("\n")}"
         end
 
 

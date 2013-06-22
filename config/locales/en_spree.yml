@@ -1,13 +1,13 @@
 ---
 en:
-  do_subscribe_to_our_mailing_list: Subscribe to our mailing list?
-  enter_your_email: Enter Email Address Here
-  subscribe: Subscribe
-  that_address_is_already_subscribed: You are already subscribed to our mailing list.
-  something_went_wrong: Something went wrong when trying to add your subscription. Please try again later.
-  invalid_email_address: Please enter your full email address, e.g. some.one@example.com
-  you_have_been_subscribed: You have been subscribed to our mailing list. Please check your email soon for a confirmation. Thank you!
-  missing_email: There was no email address given.
+  do_subscribe_to_our_mailing_list: Abonează-te la newsletter?
+  enter_your_email: Introduceți adresa de email aici
+  subscribe: Abonare
+  that_address_is_already_subscribed: Sunteți deja abonat la newsletter-ul nostru.
+  something_went_wrong: A apărut o problemă la abonare. Vă rugăm să încercați mai târziu.
+  invalid_email_address: Vă rugăm să introduceți adresa completă de email, ex.: adresa@example.com
+  you_have_been_subscribed: Ați fost abonat la newsletter. Vă rugăm sa vă verificați adresa de email pentru confirmare. Mulțumim!
+  missing_email: Nu a fost introdusă nici o adresă de email.
   mailchimp_settings: Mail Chimp Gibbon Settings
   mailchimp_settings_description: API Keys and options for Mail Chimp integration
   mailchimp_list_id: List ID

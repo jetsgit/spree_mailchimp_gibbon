@@ -18,7 +18,7 @@ Spree::User.class_eval do
 
         assign_mailchimp_subscriber_id if self.mailchimp_subscriber_id.blank?
       rescue Exception => ex
-        logger.warn "SpreeMailChimp: Failed to create contact in Mailchimp: #{ex.message}"
+        logger.warn "SpreeMailChimp: Failed to create contact in Mailchimp: #{ex.message}\n#{ex.backtrace.join("\n")}"
       end
     end
   end
@@ -33,7 +33,7 @@ Spree::User.class_eval do
         gibbon.list_unsubscribe(mailchimp_list_id, self.email, false, false, true)
         logger.debug "Removing mailchimp subscriber"
       rescue Exception => ex
-        logger.warn "SpreeMailChimp: Failed to remove contact from Mailchimp: #{ex.message}"
+        logger.warn "SpreeMailChimp: Failed to remove contact from Mailchimp: #{ex.message}\n#{ex.backtrace.join("\n")}"
       end
     end
   end
@@ -64,7 +64,8 @@ Spree::User.class_eval do
         self.mailchimp_subscriber_id = member[:id]
       end
     rescue Exception => ex
-      logger.warn "SpreeMailChimp: Failed to retrieve and store Mailchimp ID: #{ex.message}"
+      Exceptional.handle ex
+      logger.warn "SpreeMailChimp: Failed to retrieve and store Mailchimp ID: #{ex.message}\n#{ex.backtrace.join("\n")}"
     end
   end
 
