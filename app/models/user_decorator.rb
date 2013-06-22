@@ -13,7 +13,7 @@ Spree::User.class_eval do
   def mailchimp_add_to_mailing_list
     if self.is_mail_list_subscriber?
       begin
-        gibbon.list_subscribe(mailchimp_list_id, self.email, mailchimp_merge_vars, 'html', *mailchimp_subscription_opts)
+        gibbon.list_subscribe({id: mailchimp_list_id, email_address: self.email, merge_vars: mailchimp_merge_vars, email_type: 'html'}.merge(mailchimp_subscription_opts))
         logger.debug "Fetching new mailchimp subscriber info"
 
         assign_mailchimp_subscriber_id if self.mailchimp_subscriber_id.blank?
@@ -30,7 +30,7 @@ Spree::User.class_eval do
     if !self.is_mail_list_subscriber? && self.mailchimp_subscriber_id.present?
       begin
         # TODO: Get rid of those magic values. Maybe add them as Spree::Config options?
-        gibbon.list_unsubscribe(mailchimp_list_id, self.email, false, false, true)
+        gibbon.list_unsubscribe({ id: mailchimp_list_id, email_address: self.email, delete_member: false, send_goodbye: false, send_notify: true })
         logger.debug "Removing mailchimp subscriber"
       rescue Exception => ex
         logger.warn "SpreeMailChimp: Failed to remove contact from Mailchimp: #{ex.message}\n#{ex.backtrace.join("\n")}"
@@ -56,7 +56,7 @@ Spree::User.class_eval do
   # Returns the Mailchimp ID
   def assign_mailchimp_subscriber_id
     begin
-      response = gibbon.list_member_info(mailchimp_list_id, [self.email]).with_indifferent_access
+      response = gibbon.list_member_info({id: mailchimp_list_id, email_address: [self.email]}).with_indifferent_access
 
       if response[:success] == 1
         member = response[:data][0]
@@ -105,7 +105,9 @@ Spree::User.class_eval do
   # TODO: Add configuration options for 'update_existing' and 'replace_interests'
   # TODO: Remove configuration options for :mailchimp_send_notify
   def mailchimp_subscription_opts
-    [Spree::Config.get(:mailchimp_double_opt_in), true, true, Spree::Config.get(:mailchimp_send_welcome)]
+    { double_optin: Spree::Config.get(:mailchimp_double_opt_in),
+      update_existing: true, replace_interests: true,
+      send_welcome: Spree::Config.get(:mailchimp_send_welcome) }
   end
 
   # Generates the merge variables for subscribing a user
