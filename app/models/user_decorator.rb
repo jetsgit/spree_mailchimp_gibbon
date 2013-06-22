@@ -17,8 +17,7 @@ Spree::User.class_eval do
         logger.debug "Fetching new mailchimp subscriber info"
 
         assign_mailchimp_subscriber_id if self.mailchimp_subscriber_id.blank?
-      rescue => ex
-	Exceptional.handle ex 
+      rescue Exception => ex
         logger.warn "SpreeMailChimp: Failed to create contact in Mailchimp: #{ex.message}"
       end
     end
@@ -33,8 +32,7 @@ Spree::User.class_eval do
         # TODO: Get rid of those magic values. Maybe add them as Spree::Config options?
         gibbon.list_unsubscribe(mailchimp_list_id, self.email, false, false, true)
         logger.debug "Removing mailchimp subscriber"
-      rescue  => ex
-	Exceptional.handle ex 
+      rescue Exception => ex
         logger.warn "SpreeMailChimp: Failed to remove contact from Mailchimp: #{ex.message}"
       end
     end
@@ -65,8 +63,7 @@ Spree::User.class_eval do
 
         self.mailchimp_subscriber_id = member[:id]
       end
-    rescue  => ex
-      Exceptional.handle ex 
+    rescue Exception => ex
       logger.warn "SpreeMailChimp: Failed to retrieve and store Mailchimp ID: #{ex.message}"
     end
   end
