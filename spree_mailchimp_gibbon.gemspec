@@ -1,9 +1,9 @@
 # encoding: UTF-8
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_mailchimp_gibbon'
+  s.name        = 'spree_mailchimp_hominid'
   s.version     = '0.0.8'
-  s.summary     = 'Mail Chimp subscriptions for Spree using gibbon Mailchimp API wrapper'
+  s.summary     = 'Mail Chimp subscriptions for Spree using hominid Mailchimp API wrapper'
   s.required_ruby_version = '>= 1.8.7'
 
   s.author            = 'Jerrold Thompson'
@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
 
   s.add_dependency 'spree_core', '~> 1.1.3'
-  s.add_dependency 'gibbon',    '~> 0.4.6'
+  s.add_dependency 'hominid', '~> 3.0.0'
 end
