@@ -7,6 +7,10 @@ Spree::User.class_eval do
 
   private
 
+  def hominid
+    @hominid ||= Hominid::API.new(Spree::Config[:mailchimp_api_key])
+  end
+
   # Subscribes a user to the mailing list
   #
   # Returns ?

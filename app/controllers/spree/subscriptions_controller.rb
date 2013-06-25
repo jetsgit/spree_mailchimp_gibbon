@@ -8,14 +8,6 @@ class Spree::SubscriptionsController < Spree::BaseController
     elsif params[:email] !~ /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i
       @errors << t('invalid_email_address')
     else
-      begin
-        @mc_member = hominid.list_member_info(Spree::Config[:mailchimp_list_id], params[:email] )
-
-      rescue Exception => ex
-        logger.warn "SpreeMailChimp: Failed to subscribe user: #{ex.message}\n#{ex.backtrace.join("\n")}"
-
-      end
-
       if @mc_member
         @errors << t('that_address_is_already_subscribed')
       else
@@ -24,6 +16,7 @@ class Spree::SubscriptionsController < Spree::BaseController
                                   false, false, false, true )
 
         rescue Hominid::APIError => ex
+          @errors << t('that_address_is_already_subscribed')
           logger.warn "SpreeMailChimp: Failed to subscribe user: #{ex.message}\n#{ex.backtrace.join("\n")}"
         end
 
