@@ -3,12 +3,10 @@ Spree::User.class_eval do
   before_create :mailchimp_add_to_mailing_list
   before_update :mailchimp_update_in_mailing_list, :if => :is_mail_list_subscriber_changed?
 
-  attr_accessible :is_mail_list_subscriber
-
   private
 
-  def hominid
-    @hominid ||= Hominid::API.new(Spree::Config[:mailchimp_api_key])
+  def gibbon
+    @gibbon ||= Gibbon::API.new(Spree::Config[:mailchimp_api_key])
   end
 
   # Subscribes a user to the mailing list
@@ -17,7 +15,8 @@ Spree::User.class_eval do
   def mailchimp_add_to_mailing_list
     if self.is_mail_list_subscriber?
       begin
-        hominid.list_subscribe( mailchimp_list_id, self.email, mailchimp_merge_vars, 'html', mailchimp_subscription_opts)
+        gibbon.lists.subscribe( { id: mailchimp_list_id, email: { email: self.email }, merge_vars: mailchimp_merge_vars,
+                                  double_optin: false, send_welcome: true } )
         logger.debug "Fetching new mailchimp subscriber info"
 
         assign_mailchimp_subscriber_id if self.mailchimp_subscriber_id.blank?
@@ -34,7 +33,7 @@ Spree::User.class_eval do
     if !self.is_mail_list_subscriber? && self.mailchimp_subscriber_id.present?
       begin
         # TODO: Get rid of those magic values. Maybe add them as Spree::Config options?
-        hominid.list_unsubscribe( mailchimp_list_id, self.email, false, false, true )
+        gibbon.lists.unsubscribe(id: mailchimp_list_id, :email => { email: self.email }, delete_member: true, send_notify: true)
         logger.debug "Removing mailchimp subscriber"
       rescue Exception => ex
         logger.warn "SpreeMailChimp: Failed to remove contact from Mailchimp: #{ex.message}\n#{ex.backtrace.join("\n")}"
@@ -60,7 +59,7 @@ Spree::User.class_eval do
   # Returns the Mailchimp ID
   def assign_mailchimp_subscriber_id
     begin
-      response = hominid.list_member_info( mailchimp_list_id, [self.email])
+      response = gibbon.lists.member_info( { id: Spree::Config[:mailchimp_list_id], emails: [{ email: self.email }] })
 
       if response[:success] == 1
         member = response[:data][0]

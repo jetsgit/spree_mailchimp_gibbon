@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
 
   s.has_rdoc = true
 
-  s.add_dependency 'spree_core', '~> 1.1.3'
-  s.add_dependency 'hominid', '~> 3.0.0'
+  s.add_dependency 'spree_core', '~> 2.1.x'
+  s.add_dependency 'gibbon',    '~> 1.0.4'
 end
