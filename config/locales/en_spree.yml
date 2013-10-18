@@ -19,3 +19,4 @@ en:
   mailchimp_merge_vars_help: Comma separated list of callable methods on User, corresponding to Merge Vars setup in list admin. e.g. age,interests,location
   mailchimp_keys: Keys
   preferences: Preferences
+  close: Close
