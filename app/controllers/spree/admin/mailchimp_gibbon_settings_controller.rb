@@ -1,14 +1,15 @@
-class Spree::Admin::MailchimpGibbonSettingsController < Spree::Admin::BaseController
-  def show
-  end
+module Spree
+  class Admin::MailchimpGibbonSettingsController < Spree::Admin::BaseController
 
-  def update
-    Spree::Config.set(params[:preferences])
+    def show
+    end
 
-    respond_to do |format|
-      format.html {
-        redirect_to edit_admin_mailchimp_gibbon_settings_path
-      }
+    def update
+      Spree::Config.set(params[:preferences])
+
+      respond_to do |format|
+        format.html { redirect_to admin_mailchimp_gibbon_settings_path }
+      end
     end
   end
 end
