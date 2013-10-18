@@ -11,11 +11,11 @@ class Spree::SubscriptionsController < Spree::BaseController
       @errors << t('invalid_email_address')
     else
       begin
-          @mc_member = gibbon.member_info(Spree::Config.get(:mailchimp_list_id), params[:email])
+        @mc_member = gibbon.member_info(Spree::Config.get(:mailchimp_list_id), params[:email])
 
-	rescue => ex
+      rescue => ex
 
-	   Exceptional.handle ex
+        Exceptional.handle ex
 
       end
 
@@ -23,27 +23,34 @@ class Spree::SubscriptionsController < Spree::BaseController
         @errors << t('that_address_is_already_subscribed')
       else
         begin
-            gibbon.subscribe({:id => Spree::Config.get(:mailchimp_list_id),:email_address =>  params[:email] })
+          gibbon.subscribe({:id => Spree::Config.get(:mailchimp_list_id),:email_address =>  params[:email] })
 
-	 rescue => ex
+        rescue => ex
 
-	   Exceptional.handle ex
+          Exceptional.handle ex
 
-	 end
+        end
 
 
       end
     end
 
     respond_to do |format|
-      format.js { render :layout => false }
+      format.js do
+        if @errors.empty?
+          flash[:success] = Spree.t(:you_have_been_subscribed)
+        else
+          flash[:error] = @errors.join('. ')
+        end
+        render 'spree/subscriptions/create'
+      end
     end
   end
 
   private
 
-    def gibbon
-	@gibbon ||= Gibbon.new({ :api_key => Spree::Config.get(:mailchimp_api_key) })
-    end
+  def gibbon
+    @gibbon ||= Gibbon.new({ :api_key => Spree::Config.get(:mailchimp_api_key) })
+  end
 
 end
