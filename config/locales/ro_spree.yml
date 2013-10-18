@@ -15,7 +15,7 @@ ro:
   mailchimp_send_notify: Trimite notificări administratorului la abonare nouă
   mailchimp_double_opt_in: Double opt-in
   mailchimp_merge_vars: Atribute utilizator pentru trimitere la abonare
-  mailchimp_merge_vars_help: Listă, separată prin virgulă, a metodelor apelabile pe User, corespunzătoare configurării Merge Vars din lista de admin; ex.: vârstă, interese, locație
+  mailchimp_merge_vars_help: "Listă, separată prin virgulă, a metodelor apelabile pe User, corespunzătoare configurării Merge Vars din lista de admin; ex.: vârstă, interese, locație"
   mailchimp_keys: Chei
   preferences: Opțiuni
   close: Închide
