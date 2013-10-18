@@ -18,4 +18,5 @@ ro:
   mailchimp_merge_vars_help: "Listă, separată prin virgulă, a metodelor apelabile pe User, corespunzătoare configurării Merge Vars din lista de admin; ex.: vârstă, interese, locație"
   mailchimp_keys: Chei
   preferences: Opțiuni
+  subscribe: Abonare newsletter
   close: Închide
