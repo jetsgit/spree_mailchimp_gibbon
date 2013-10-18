@@ -23,13 +23,14 @@ class Spree::SubscriptionsController < Spree::BaseController
             @errors << t('that_address_is_already_subscribed')
           end
 
-        end
-      elsif @mc_member["errors"].present?
-        if @mc_member["errors"].first["code"] != 232
-          @errors << t('that_address_is_already_subscribed')
-        else
-          gibbon.lists.subscribe( { id: Spree::Config[:mailchimp_list_id], email: { email: params[:email] }, merge_vars: {},
-                                    double_optin: false, send_welcome: true } )
+
+        elsif @mc_member["errors"].present?
+          if @mc_member["errors"].first["code"] != 232
+            @errors << t('that_address_is_already_subscribed')
+          else
+            gibbon.lists.subscribe( { id: Spree::Config[:mailchimp_list_id], email: { email: params[:email] }, merge_vars: {},
+                                      double_optin: false, send_welcome: true } )
+          end
         end
       end
     end

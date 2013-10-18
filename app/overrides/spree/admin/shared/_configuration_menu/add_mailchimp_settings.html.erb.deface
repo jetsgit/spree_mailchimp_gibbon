@@ -1,2 +1,2 @@
-<!-- insert_bottom "[data-hook='admin_configurations_sidebar_menu'] -->
-<%= configurations_sidebar_menu_item Spree.t('spree_mailchimp_gibbon.mailchimp_gibbon_settings'), admin_mailchimp_gibbon_settings_path %>
+<!-- insert_bottom "[data-hook='admin_configurations_sidebar_menu']" -->
+<%= configurations_sidebar_menu_item Spree.t('mailchimp_gibbon_settings'), admin_mailchimp_gibbon_settings_path %>
