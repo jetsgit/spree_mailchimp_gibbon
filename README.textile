@@ -1,6 +1,6 @@
-h1. Mail Chimp integration with Gibbon gem for Spree
+h1. Mail Chimp integration with Gibbon gem for Spree 2.1
 
-MailChimp API integration for a Spree store, using the gibbon gem.
+MailChimp API 2.0 integration for a Spree 2.1 store, using the gibbon gem.
 
 Adds a checkbox to the user signup form to allow customer to opt-in to your Mailchimp mailing list. Mailchimp API calls happen via the gibbon gem.
 
@@ -12,13 +12,13 @@ h2. Subscription form partial with JS
 
 Also includes a partial at <code>shared/newsletter_subscribe_form</code> that can be included in your footer or sidebar anywhere on the site, has one field for the email address. jQuery code in <code>public/javascripts/mailchimp_subscribe.js</code> will POST to the SubscriptionsController which will relay to Mailchimp.
 
-The SimpleModal plugin is used in the EJB to pop up a confirmation or error alert (because you won't be satisfied with a simple alert() box)
+Flash messages will show a confirmation or error alert.
 
 h3. Installation
 
 Add to project's Gemfile:
 <pre><code>
-gem 'spree_mailchimp_gibbon', :git => git://github.com/bluehandtalking/spree_mailchimp_gibbon.git 
+gem 'spree_mailchimp_gibbon', github: 'bluehandtalking/spree_mailchimp_gibbon', branch: '2-1-stable'
 </code> </pre>
 
 Run from project's root:
@@ -49,17 +49,12 @@ Unfortunately these are only sent at the time the subscription is created, so th
 
 h3. Requirements
 
-Spree >= 1.0
+Spree 2.1.x
 
-gem 'gibbon',  '~> 0.4.2' 
-gem 'exceptional'  #  For Testing
-
-Also uses the jQuery SimpleModal plugin, included.
+gem 'gibbon',  '~> 1.0.x'
 
 h3. Credits
 
 Authored by Jerrold Thompson @bluehandtalking
 
 Based heavily on spree_mail_chimp by Sam Beam @sbeam
-
-includes SimpleModal http://www.ericmmartin.com/projects/simplemodal/
