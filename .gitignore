@@ -9,3 +9,5 @@
 .project
 coverage/*
 *.swp
+.ruby-version
+.ruby-gemset
